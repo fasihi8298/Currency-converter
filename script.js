@@ -1,4 +1,4 @@
-let api = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+let api = `https://v6.exchangerate-api.com/v6/${apikey}11b816fa5db9a12682dcbf50/latest/USD`;
 const fromDropDown = document.getElementById("from-currency-select");
 const toDropDown = document.getElementById("to-currency-select");
 
@@ -22,3 +22,30 @@ currencies.forEach((currency) => {
 fromDropDown.value = "USD";
 toDropDown.value = "INR";
 
+let convertCurrency = () => {
+  //Create References
+  const amount = document.querySelector("#amount").value;
+  const fromCurrency = fromDropDown.value;
+  const toCurrency = toDropDown.value;
+
+  //If amount input field is not empty
+  if (amount.length != 0) {
+    fetch(api)
+      .then((resp) => resp.json())
+      .then((data) => {
+        let fromExchangeRate = data.conversion_rates[fromCurrency];
+        let toExchangeRate = data.conversion_rates[toCurrency];
+        const convertedAmount = (amount / fromExchangeRate) * toExchangeRate;
+        result.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(
+          2
+        )} ${toCurrency}`;
+      });
+  } else {
+    alert("Please fill in the amount");
+  }
+};
+
+document
+  .querySelector("#convert-button")
+  .addEventListener("click", convertCurrency);
+window.addEventListener("load", convertCurrency);
