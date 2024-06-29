@@ -1,4 +1,4 @@
-let api = `https://v6.exchangerate-api.com/v6/${apikey}11b816fa5db9a12682dcbf50/latest/USD`;
+let api = `https://v6.exchangerate-api.com/v6${apiKey}/11b816fa5db9a12682dcbf50/latest/USD`;
 const fromDropDown = document.getElementById("from-currency-select");
 const toDropDown = document.getElementById("to-currency-select");
 
@@ -20,7 +20,7 @@ currencies.forEach((currency) => {
 
 //Setting default values
 fromDropDown.value = "USD";
-toDropDown.value = "INR";
+toDropDown.value = "PKR";
 
 let convertCurrency = () => {
   //Create References
